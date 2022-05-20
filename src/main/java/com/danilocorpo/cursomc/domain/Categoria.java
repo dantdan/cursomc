@@ -1,11 +1,21 @@
 package com.danilocorpo.cursomc.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 public class Categoria implements Serializable {
 
     // Versão 1 da classe do tipo Serializable
     private static final long seriaLVersionUID = 1l;
+
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
 
