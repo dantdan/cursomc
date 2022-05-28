@@ -6,27 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
 
-    // Versão 1 da classe do tipo Serializable
     private static final long seriaLVersionUID = 1l;
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nome;
+    private Double preco;
 
-    @ManyToMany(mappedBy = "categorias")
-    private List<Produto> produtos = new ArrayList<Produto>();
+    @ManyToMany
+    @JoinTable(name = "PRODUTO_CATEGORIA",
+        joinColumns = @JoinColumn(name = "produto_id"),
+        inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+    private List<Categoria> categorias = new ArrayList<Categoria>();
 
-    public Categoria(){
+    public Produto(){
+
     }
 
-    public Categoria(Integer id, String nome) {
+    public Produto(Integer id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
+        this.preco = preco;
     }
 
     public Integer getId() {
@@ -45,12 +48,20 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
-    public List<Produto> getProdutos() {
-        return produtos;
+    public Double getPreco() {
+        return preco;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public List<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     @Override
